@@ -1,0 +1,195 @@
+{% extends 'static/base.html' %}  
+   
+    {% block title %}
+
+        <title>Mise à Jour des données</title>
+
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+        <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+        <script src="https://npmcdn.com/flatpickr/dist/flatpickr.min.js"></script>
+        <script src="https://npmcdn.com/flatpickr/dist/l10n/fr.js"></script>
+
+    {% endblock %}
+
+
+    {% block header %}
+
+        {% include 'static/header.html' %}
+
+    {% endblock %}
+
+
+    {% block content %}
+
+            <section  class="my-2" id="connection">  
+                <div class="container">
+                    <div class="row gy-4 align-items-center">
+                        <div class="col-12 col-md-12">
+                            <h2 class="fw-bold text-md-center" id ="defile"><center>Cartographie des declenchements alarmes</center></h2>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="information" class="mt-0 bg-light">
+              <div class="container">
+                  <div class="row">
+                    <div class="col-2">
+                      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                        Cliquez ici
+                      </button>
+                    </div>
+                    <div class="col-10">
+                      <marquee id = "message"> Cette carte vous permet de visualiser les declenchements alarmes selon la période choisie. Pour choisir une (des) dates et/ou de(s) heure(s), cliquez sur le bouton bleu à gauche. </marquee>  
+                    </div>  
+                  </div>
+                </div>  
+          </section> 
+        
+      <!-- Modal -->
+      <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+              <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Choix à faire</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <h6>Choix de la période</h6>
+                    
+                    <br>
+                    
+                    <form method="post" action="{% url 'carte:carte' %}" enctype="multipart/form-data" id="form">
+                      {% csrf_token %}
+
+                      <input class="form-control" type="datetime-local" placeholder="Date et heure ici" name="date_heure" id="date_heure" required>
+
+                    <!--
+                    <hr>
+                    <h5>Choix des heures</h5>
+                        <div class="row"> 
+                          <div class="col"> 
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault1" checked>
+                                  <label class="form-check-label" for="flexSwitchCheckDefault">00H - 02H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">02H - 04H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">04H - 06H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">06H - 08H</label>
+                              </div>
+                          </div>
+                          <div class="col">     
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                  <label class="form-check-label" for="flexSwitchCheckDefault">08H - 10H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">10H - 12H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">12H - 14H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">14H - 16H</label>
+                              </div>
+                          </div> 
+                          
+                          <div class="col">     
+                              <div class="form-check form-switch">
+                                  <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                  <label class="form-check-label" for="flexSwitchCheckDefault">16H - 18H</label>
+                              </div> 
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">18H - 20H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">20H - 22H</label>
+                              </div>
+                              <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="flexSwitchCheckDefault2" checked>
+                                <label class="form-check-label" for="flexSwitchCheckDefault">22H - 00H</label>
+                              </div>
+                          </div> 
+
+                      </div>
+                      -->
+
+                      
+                      </div>
+                     <!-- 
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" class="btn-close">Fermer</button>
+                    <button type="submit" class="btn btn-primary" >Enregistrer</button>
+                  </div> 
+                    -->
+                </form>
+
+              </div>
+          </div>  
+      </div> 
+<!-- Fenêtre modale-->    
+         <!-- Affiche la carte ici -->
+        <div id="map" >{{map|safe}}</div>
+
+        <script type="text/javascript">
+          
+          flatpickr("input[type=datetime-local]", {
+            "locale": "fr",
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+           // dateFormat: "Y-m-d H:i",
+            minDate: "2024-04-01",
+            maxDate: "today",
+            time_24hr: true,
+            mode: "range",
+            
+            onClose: function(){
+              user = " "
+              user = document.getElementById("date_heure").value ;
+              //console.log(user);
+              user = String(user);
+              if (user === ""){user = "aucun";}
+              //console.log(user);
+              htmx.ajax('GET', `/carte_actualise_htmx/${user}`, {target:'#map', swap:'innerHTML'});
+
+              document.getElementById("message").innerHTML = "Vous visualisez les déclenchements sur la période suivante : " + user + ". Cliquez sur le bouton bleu à gauche pour un autre choix."
+
+              //htmx.ajax('GET', `/carte_actualise_htmx/${user}`);
+            }
+           
+          });
+          /*
+          var texte = document.getElementById("form"); 
+              texte.addEventListener('submit', function(event){
+              event.preventDefault()
+              user = document.getElementById("date_heure").value ;
+              console.log(user);*/
+          
+        /*
+          $(document).ready(function(){
+             if (jQuery) {  
+               // jQuery is loaded  
+               alert("Yeah!");
+             } else {
+               // jQuery is not loaded
+               alert("Doesn't Work");
+             }
+          }); */
+
+      </script>
+            
+    {% endblock %}
